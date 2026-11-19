@@ -22,7 +22,8 @@ cleanup() {
 }
 trap cleanup EXIT
 
-zip -q -X -j "$archive" "$root/src/info.json" "$root/src/main.js" "$root/LICENSE"
+zip -q -X -j "$archive" \
+    "$root/src/info.json" "$root/src/main.js" "$root/src/icon.png" "$root/LICENSE"
 unzip -tqq "$archive"
 mv -f "$archive" "$output"
 printf '%s\n' "$output"
