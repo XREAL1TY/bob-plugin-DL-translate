@@ -1,2 +1,5 @@
 .DS_Store
+
+# Bob plugin build outputs
 /dist/
+*.bobplugin
