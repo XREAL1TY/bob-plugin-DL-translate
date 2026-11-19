@@ -10,8 +10,8 @@ Translate selected or typed text with DL directly in Bob. The plugin requires Bo
 
 ## Install
 
-1. Double-click the `.bobplugin` package. If you built it locally, find it in `dist/`.
-2. In Bob, open **Preferences → Translation → Services**. Under **Text Translation**, click `+`, select the DL service with the logo shown above, then enable and save the service.
+1. Double-click the `dl-translate-*.bobplugin` package. If you built it locally, find it in `dist/`.
+2. In Bob, open **Preferences → Translation → Services**. Under **Text Translation**, click `+`, select **DL Translate（免 API 密钥）**, then enable and save the service.
 3. Select or type text to translate it.
 
 The plugin uses DL's `oneshot-free` endpoint, which is outside the public developer API and may change. Errors show the HTTP status and DL error code when available. The plugin distinguishes rate limits from exhausted quotas.
