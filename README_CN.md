@@ -21,3 +21,7 @@
 欢迎提交 Issue 和 Pull Request。反馈问题时，请附上 Bob 和插件版本，以及复现步骤。
 
 感谢 [akl7777777 的原版插件](https://github.com/akl7777777/bob-plugin-akl-deepl-free-translate) 提供实现参考，也感谢 Dark15 在 [PR #26](https://github.com/akl7777777/bob-plugin-akl-deepl-free-translate/pull/26) 中提供 `oneshot-free` 接口适配。插件实现参考了 [Bob 插件开发文档](https://bobtranslate.com/plugin/)。
+
+## 开源许可
+
+本项目采用 [MIT 许可证](LICENSE)。

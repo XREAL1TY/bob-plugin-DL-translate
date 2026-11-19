@@ -21,3 +21,7 @@ On macOS, run `sh scripts/build.sh` from the repository root. The script writes 
 Issues and pull requests are welcome. When reporting a bug, include your Bob and plugin versions and the steps to reproduce it.
 
 Thanks to akl7777777 for the [original plugin](https://github.com/akl7777777/bob-plugin-akl-deepl-free-translate) and to Dark15 for adapting it to the `oneshot-free` endpoint in [PR #26](https://github.com/akl7777777/bob-plugin-akl-deepl-free-translate/pull/26). This implementation follows the [Bob plugin development guide](https://bobtranslate.com/plugin/).
+
+## License
+
+Released under the [MIT License](LICENSE).
