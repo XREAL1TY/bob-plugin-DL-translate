@@ -1,8 +1,8 @@
 {
-  "identifier": "local.bob.deeplfree",
-  "version": "0.1.4",
+  "identifier": "local.bob.dl.noapikey",
+  "version": "0.1.5",
   "category": "translate",
-  "name": "DL Translate（免 API 密钥）",
+  "name": "DL Translate",
   "summary": "无需 API 密钥，直接在 Bob 中显示 DL 译文。",
   "homepage": "https://github.com/XREAL1TY/bob-plugin-DL-translate",
   "minBobVersion": "1.21.0"
