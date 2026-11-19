@@ -18,7 +18,9 @@ The plugin uses DL's `oneshot-free` endpoint, which is outside the public develo
 
 ## Build locally
 
-On macOS, run `sh scripts/build.sh` from the repository root. The script writes the package to `dist/` and prints its full path. The plugin has no JavaScript dependencies. Set the release version in `src/info.json`.
+On macOS, run `sh scripts/build.sh` from the repository root. The script writes the package to `dist/` and prints its full path. The plugin has no JavaScript dependencies.
+
+For each release, set the version in `src/info.json` before building. Add the final download URL, package SHA-256, minimum Bob version, and release timestamp to [`appcast.json`](appcast.json), with the newest entry first.
 
 ## Contributing and acknowledgments
 

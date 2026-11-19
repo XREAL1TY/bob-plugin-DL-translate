@@ -18,7 +18,9 @@
 
 ## 本地打包
 
-在 macOS 上运行 `sh scripts/build.sh`，脚本会在 `dist/` 生成安装包，并输出完整路径。插件没有 JavaScript 依赖。发布新版时更新 `src/info.json` 中的版本号。
+在 macOS 上运行 `sh scripts/build.sh`，脚本会在 `dist/` 生成安装包，并输出完整路径。插件没有 JavaScript 依赖。
+
+发布新版时，先更新 `src/info.json` 中的版本号再打包。将最终下载地址、安装包的 SHA-256、最低 Bob 版本和发布时间戳写入 [`appcast.json`](appcast.json)，最新版本放在最前面。
 
 ## 贡献与致谢
 

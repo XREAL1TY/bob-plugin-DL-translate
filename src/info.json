@@ -1,9 +1,10 @@
 {
   "identifier": "local.bob.dl.noapikey",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "category": "translate",
   "name": "DL Translate",
   "summary": "无需 API 密钥，直接在 Bob 中显示 DL 译文。",
   "homepage": "https://github.com/XREAL1TY/bob-plugin-DL-translate",
+  "appcast": "https://raw.githubusercontent.com/XREAL1TY/bob-plugin-DL-translate/main/appcast.json",
   "minBobVersion": "1.21.0"
 }
