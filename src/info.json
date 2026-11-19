@@ -1,0 +1,10 @@
+{
+  "identifier": "local.bob.deeplfree",
+  "version": "0.1.0",
+  "category": "translate",
+  "name": "DeepL Free Translate",
+  "summary": "无需 API 密钥，直接在 Bob 中显示 DeepL 译文。",
+  "icon": "115",
+  "homepage": "https://www.deepl.com/translator",
+  "minBobVersion": "1.21.0"
+}
