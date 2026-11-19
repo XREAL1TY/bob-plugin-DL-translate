@@ -1,16 +1,16 @@
-# DeepL Free Translate for Bob
+# DL Free Translate for Bob
 
 [简体中文](README_CN.md)
 
-Translate selected or typed text with DeepL directly in Bob. The plugin requires Bob 1.21.0 or later and works without an API key or a local server. It supports automatic source language detection, Simplified and Traditional Chinese, and multiline text.
+Translate selected or typed text with DL directly in Bob. The plugin requires Bob 1.21.0 or later and works without an API key or a local server. It supports automatic source language detection, Simplified and Traditional Chinese, and multiline text.
 
 ## Install
 
 1. Double-click the `.bobplugin` package. If you built it locally, find it in `dist/`.
-2. In Bob, open **Preferences → Translation → Services**. Under **Text Translation**, click `+`, select **DeepL Free Translate**, then enable and save the service.
+2. In Bob, open **Preferences → Translation → Services**. Under **Text Translation**, click `+`, select **DL Free Translate**, then enable and save the service.
 3. Select or type text to translate it.
 
-The plugin uses DeepL's `oneshot-free` endpoint. DeepL does not list this endpoint in its public developer documentation and may change its availability. If DeepL rate limits a request, the plugin asks you to try again later.
+The plugin uses DL's `oneshot-free` endpoint, which is outside the public developer API and may change. If a request is rate limited, the plugin asks you to try again later.
 
 ## Build locally
 

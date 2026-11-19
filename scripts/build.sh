@@ -9,7 +9,7 @@ case "$version" in
         exit 1
         ;;
 esac
-output="$root/dist/deepl-free-translate-$version.bobplugin"
+output="$root/dist/dl-free-translate-$version.bobplugin"
 
 mkdir -p "$root/dist"
 staging=$(mktemp -d "$root/dist/.build.XXXXXX")

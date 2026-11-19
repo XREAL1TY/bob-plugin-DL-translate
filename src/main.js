@@ -16,14 +16,14 @@ function supportLanguages() {
     return ['auto', ...LANGUAGES];
 }
 
-function deepLTag(language) {
+function dlTag(language) {
     if (LANGUAGES.includes(language)) return PORTUGUESE_TAGS.get(language) ?? language;
 }
 
 function detectedSource(code, fallback) {
     if (typeof code !== 'string') return fallback;
     const normalized = code.toLowerCase();
-    // DeepL may report only the base language. Keep Bob's regional variant if available.
+    // DL may report only the base language. Keep Bob's regional variant if available.
     if (normalized === 'zh') return fallback === 'zh-Hant' ? 'zh-Hant' : 'zh-Hans';
     if (normalized === 'pt') return PORTUGUESE_TAGS.has(fallback) ? fallback : 'pt';
     if (normalized === 'en-us' || normalized === 'en-gb') return 'en';
@@ -38,18 +38,18 @@ function requestError(status) {
     switch (status) {
         case 400:
         case 422:
-            return errorResult('param', 'DeepL 无法处理这段原文，请检查文本和所选语言。');
+            return errorResult('param', 'DL 无法处理这段原文，请检查文本和所选语言。');
         case 401:
         case 403:
-            return errorResult('network', 'DeepL 当前拒绝此请求，请稍后重试。');
+            return errorResult('network', 'DL 当前拒绝此请求，请稍后重试。');
         case 413:
             return errorResult('param', '原文太长，请分段翻译。');
         case 429:
-            return errorResult('network', 'DeepL 请求过于频繁，请稍后重试。');
+            return errorResult('network', 'DL 请求过于频繁，请稍后重试。');
         default:
             return errorResult('network', status
-                ? `DeepL 请求失败（HTTP ${status}），请稍后重试。`
-                : '无法连接 DeepL，请检查网络后重试。');
+                ? `DL 请求失败（HTTP ${status}），请稍后重试。`
+                : '无法连接 DL，请检查网络后重试。');
     }
 }
 
@@ -62,11 +62,11 @@ async function translate(query) {
     const autoSource = !query.from || query.from === 'auto';
     const from = autoSource ? query.detectFrom : query.from;
     const to = query.to && query.to !== 'auto' ? query.to : query.detectTo;
-    const source = autoSource ? undefined : deepLTag(from);
-    // DeepL accepts 'en' as a source but requires a regional tag for an English target.
-    const target = to === 'en' ? 'en-US' : deepLTag(to);
+    const source = autoSource ? undefined : dlTag(from);
+    // DL accepts 'en' as a source but requires a regional tag for an English target.
+    const target = to === 'en' ? 'en-US' : dlTag(to);
     if (!target || (!autoSource && !source)) {
-        return query.onCompletion(errorResult('unsupportedLanguage', 'DeepL 不支持所选语言。'));
+        return query.onCompletion(errorResult('unsupportedLanguage', 'DL 不支持所选语言。'));
     }
 
     const body = { text: [text], target_lang: target };
@@ -93,7 +93,7 @@ async function translate(query) {
     }
     const translation = response.data?.translations?.[0];
     if (typeof translation?.text !== 'string' || !translation.text.trim()) {
-        return query.onCompletion(errorResult('api', 'DeepL 没有返回可显示的译文。'));
+        return query.onCompletion(errorResult('api', 'DL 没有返回可显示的译文。'));
     }
 
     query.onCompletion({

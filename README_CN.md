@@ -1,4 +1,4 @@
-# Bob 的 DeepL Free Translate 插件
+# Bob 的 DL Free Translate 插件
 
 [English](README.md)
 
@@ -7,10 +7,10 @@
 ## 安装
 
 1. 双击 `.bobplugin` 安装包。本地打包后可在 `dist/` 找到安装包。
-2. 打开 Bob 的「偏好设置 → 翻译 → 服务」，在「文本翻译」里点 `+`，选择 **DeepL Free Translate**，启用并保存。
+2. 打开 Bob 的「偏好设置 → 翻译 → 服务」，在「文本翻译」里点 `+`，选择 **DL Free Translate**，启用并保存。
 3. 划词或输入文本即可使用。
 
-插件使用 DeepL 的 `oneshot-free` 接口。该接口未列入 DeepL 的公开开发者 API 文档，可用性由 DeepL 决定。收到限流响应时，插件会提示稍后重试。
+插件使用 DL 的 `oneshot-free` 接口。该接口未列入公开开发者 API，可用性由 DL 决定。收到限流响应时，插件会提示稍后重试。
 
 ## 本地打包
 
