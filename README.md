@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="src/icon.png" alt="DL Free Translate logo" width="128" height="128">
+</p>
+
 # DL Free Translate for Bob
 
 [简体中文](README_CN.md)

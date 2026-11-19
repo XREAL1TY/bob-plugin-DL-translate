@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="src/icon.png" alt="DL Free Translate logo" width="128" height="128">
+</p>
+
 # Bob 的 DL Free Translate 插件
 
 [English](README.md)
