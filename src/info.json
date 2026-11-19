@@ -1,6 +1,6 @@
 {
   "identifier": "local.bob.deeplfree",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "category": "translate",
   "name": "DL Free Translate",
   "summary": "无需 API 密钥，直接在 Bob 中显示 DL 译文。",

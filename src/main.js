@@ -161,3 +161,6 @@ async function translate(query) {
         },
     });
 }
+
+exports.supportLanguages = supportLanguages;
+exports.translate = translate;
