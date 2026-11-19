@@ -93,7 +93,7 @@ async function translate(query) {
     }
     const translation = response.data?.translations?.[0];
     if (typeof translation?.text !== 'string' || !translation.text.trim()) {
-        return query.onCompletion(errorResult('network', 'DeepL 没有返回可显示的译文。'));
+        return query.onCompletion(errorResult('api', 'DeepL 没有返回可显示的译文。'));
     }
 
     query.onCompletion({
