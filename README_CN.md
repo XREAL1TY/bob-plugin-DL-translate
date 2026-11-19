@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="src/icon.png" alt="DL Free Translate logo" width="128" height="128">
+  <img src="src/icon.png" alt="DL Translate logo" width="128" height="128">
 </p>
 
-# Bob 的 DL Free Translate 插件
+# Bob 的 DL 翻译插件（免 API 密钥）
 
 [English](README.md)
 
@@ -11,7 +11,7 @@
 ## 安装
 
 1. 双击 `.bobplugin` 安装包。本地打包后可在 `dist/` 找到安装包。
-2. 打开 Bob 的「偏好设置 → 翻译 → 服务」，在「文本翻译」里点 `+`，选择 **DL Free Translate**，启用并保存。
+2. 打开 Bob 的「偏好设置 → 翻译 → 服务」，在「文本翻译」里点 `+`，选择带有上方图标的 DL 服务，启用并保存。
 3. 划词或输入文本即可使用。
 
 插件使用 DL 的 `oneshot-free` 接口。该接口未列入公开开发者 API，可用性由 DL 决定。失败时会显示可用的 HTTP 状态和 DL 错误码，并区分限流与配额用尽。

@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="src/icon.png" alt="DL Free Translate logo" width="128" height="128">
+  <img src="src/icon.png" alt="DL Translate logo" width="128" height="128">
 </p>
 
-# DL Free Translate for Bob
+# DL Translate for Bob (No API Key)
 
 [简体中文](README_CN.md)
 
@@ -11,7 +11,7 @@ Translate selected or typed text with DL directly in Bob. The plugin requires Bo
 ## Install
 
 1. Double-click the `.bobplugin` package. If you built it locally, find it in `dist/`.
-2. In Bob, open **Preferences → Translation → Services**. Under **Text Translation**, click `+`, select **DL Free Translate**, then enable and save the service.
+2. In Bob, open **Preferences → Translation → Services**. Under **Text Translation**, click `+`, select the DL service with the logo shown above, then enable and save the service.
 3. Select or type text to translate it.
 
 The plugin uses DL's `oneshot-free` endpoint, which is outside the public developer API and may change. Errors show the HTTP status and DL error code when available. The plugin distinguishes rate limits from exhausted quotas.
