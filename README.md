@@ -10,7 +10,7 @@ Translate selected or typed text with DL directly in Bob. The plugin requires Bo
 2. In Bob, open **Preferences → Translation → Services**. Under **Text Translation**, click `+`, select **DL Free Translate**, then enable and save the service.
 3. Select or type text to translate it.
 
-The plugin uses DL's `oneshot-free` endpoint, which is outside the public developer API and may change. If a request is rate limited, the plugin asks you to try again later.
+The plugin uses DL's `oneshot-free` endpoint, which is outside the public developer API and may change. Errors show the HTTP status and DL error code when available. The plugin distinguishes rate limits from exhausted quotas.
 
 ## Build locally
 
