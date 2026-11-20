@@ -14,6 +14,8 @@ Translate selected or typed text with DL directly in Bob. The plugin requires Bo
 2. In Bob, open **Preferences → Translation → Services**. Under **Text Translation**, click `+`, select **DL Translate**, then enable and save the service.
 3. Select or type text to translate it.
 
+Each request is limited to 1,500 UTF-16 code units. Longer text is split at sentence boundaries when possible, translated in order, and joined while preserving line breaks at the split points.
+
 The plugin uses DL's `oneshot-free` endpoint, which is outside the public developer API and may change. Errors show the HTTP status and DL error code when available. The plugin distinguishes rate limits from exhausted quotas.
 
 ## Build locally

@@ -1,4 +1,6 @@
 const TRANSLATE_URL = 'https://oneshot-free.www.deepl.com/v1/translate';
+// The endpoint counts UTF-16 code units, as JavaScript string.length does.
+const MAX_TEXT_LENGTH = 1500;
 
 const LANGUAGES = [
     'ar', 'bg', 'cs', 'da', 'de', 'el', 'en', 'es', 'et', 'fi', 'fr', 'hu',
@@ -110,6 +112,76 @@ function requestError(response) {
     return errorResult(type, `${message}${suffix}。`, addition);
 }
 
+function findChunkEnd(text, start) {
+    let end = Math.min(start + MAX_TEXT_LENGTH, text.length);
+    if (end === text.length) return { end, atSentenceBoundary: false };
+    if (/[\uD800-\uDBFF]/.test(text[end - 1]) && /[\uDC00-\uDFFF]/.test(text[end])) {
+        end--;
+    }
+
+    let lineBreak;
+    let whitespace;
+    for (let index = end; index > start; index--) {
+        const character = text[index - 1];
+        const decimalPoint = character === '.' && /\d/.test(text.charAt(index - 2))
+            && /\d/.test(text.charAt(index));
+        if (!decimalPoint && '.。!?！？'.includes(character)) {
+            // Keep closing quotes and brackets with the sentence when they fit.
+            while (index < end && /["'”’」』）)\]]/.test(text[index])) index++;
+            return { end: index, atSentenceBoundary: true };
+        }
+        if (!lineBreak && (character === '\n' || character === '\r')) lineBreak = index;
+        if (!whitespace && /\s/.test(character)) whitespace = index;
+    }
+    return { end: lineBreak ?? whitespace ?? end, atSentenceBoundary: false };
+}
+
+function splitText(text) {
+    if (text.length <= MAX_TEXT_LENGTH) return [{ text, separator: '' }];
+
+    const input = text.trim();
+    const chunks = [];
+    for (let start = 0; start < input.length;) {
+        const { end, atSentenceBoundary } = findChunkEnd(input, start);
+        const chunk = input.slice(start, end).trimEnd();
+        let next = end;
+        while (next < input.length && /\s/.test(input[next])) next++;
+        chunks.push({ text: chunk, separator: input.slice(start + chunk.length, next), atSentenceBoundary });
+        start = next;
+    }
+    return chunks;
+}
+
+async function requestTranslation(text, source, target, cancelSignal) {
+    const body = { text: [text], target_lang: target };
+    if (source) body.source_lang = source;
+    const request = {
+        method: 'POST',
+        url: TRANSLATE_URL,
+        header: { 'Content-Type': 'application/json' },
+        body,
+        timeout: 12,
+    };
+    if (cancelSignal) request.cancelSignal = cancelSignal;
+
+    let response;
+    try {
+        response = await $http.request(request);
+    } catch (error) {
+        return requestError(error);
+    }
+
+    const status = response?.response?.statusCode;
+    if (status !== 200 || response.error) {
+        return requestError(response);
+    }
+    const translation = response.data?.translations?.[0];
+    if (typeof translation?.text !== 'string' || !translation.text.trim()) {
+        return requestError(response);
+    }
+    return { translation };
+}
+
 async function translate(query) {
     const text = query.text;
     if (typeof text !== 'string' || !text.trim()) {
@@ -126,40 +198,42 @@ async function translate(query) {
         return query.onCompletion(errorResult('unsupportedLanguage', 'DL 不支持所选语言。'));
     }
 
-    const body = { text: [text], target_lang: target };
-    if (source) body.source_lang = source;
-    const request = {
-        method: 'POST',
-        url: TRANSLATE_URL,
-        header: { 'Content-Type': 'application/json' },
-        body,
-        timeout: 12,
-    };
-    if (query.cancelSignal) request.cancelSignal = query.cancelSignal;
+    const chunks = splitText(text);
+    const multipart = chunks.length > 1;
+    const spaceBetweenSentences = to !== 'ja' && !to.startsWith('zh-');
+    const cancelSignal = query.cancelSignal;
+    let cancelled = false;
+    const subscription = multipart ? cancelSignal?.subscribe?.(() => { cancelled = true; }) : undefined;
+    const output = [];
+    let sourceCode;
 
-    let response;
     try {
-        response = await $http.request(request);
-    } catch (error) {
-        return query.onCompletion(requestError(error));
-    }
+        for (const [index, chunk] of chunks.entries()) {
+            if (cancelled) break;
+            const { error, translation } = await requestTranslation(chunk.text, source, target, cancelSignal);
+            if (cancelled) break;
+            if (error) {
+                if (multipart) error.message = `第 ${index + 1}/${chunks.length} 段翻译失败。${error.message}`;
+                return query.onCompletion({ error });
+            }
 
-    const status = response?.response?.statusCode;
-    if (status !== 200 || response.error) {
-        return query.onCompletion(requestError(response));
-    }
-    const translation = response.data?.translations?.[0];
-    if (typeof translation?.text !== 'string' || !translation.text.trim()) {
-        return query.onCompletion(requestError(response));
-    }
+            sourceCode ||= translation.detected_source_language;
+            const joinsSentences = spaceBetweenSentences && chunk.atSentenceBoundary;
+            const separator = chunk.separator || (joinsSentences ? ' ' : '');
+            output.push(multipart ? translation.text.trim() + separator : translation.text);
+        }
 
-    query.onCompletion({
-        result: {
-            from: autoSource ? detectedSource(translation.detected_source_language, from) : from,
-            to,
-            content: { format: 'plain', text: translation.text },
-        },
-    });
+        if (cancelled) return query.onCompletion(errorResult('network', '翻译已取消。'));
+        query.onCompletion({
+            result: {
+                from: autoSource ? detectedSource(sourceCode, from) : from,
+                to,
+                content: { format: 'plain', text: output.join('') },
+            },
+        });
+    } finally {
+        subscription?.dispose();
+    }
 }
 
 exports.supportLanguages = supportLanguages;
