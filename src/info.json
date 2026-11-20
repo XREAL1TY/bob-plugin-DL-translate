@@ -1,6 +1,6 @@
 {
-  "identifier": "local.bob.dl.noapikey",
-  "version": "0.1.7",
+  "identifier": "bob.dl.noapikey",
+  "version": "0.1.8",
   "category": "translate",
   "name": "DL Translate",
   "summary": "无需 API 密钥，直接在 Bob 中显示 DL 译文。",
