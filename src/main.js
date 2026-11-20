@@ -115,6 +115,7 @@ function requestError(response) {
 function findChunkEnd(text, start) {
     let end = Math.min(start + MAX_TEXT_LENGTH, text.length);
     if (end === text.length) return { end, atSentenceBoundary: false };
+    // Keep surrogate pairs intact at the length limit.
     if (/[\uD800-\uDBFF]/.test(text[end - 1]) && /[\uDC00-\uDFFF]/.test(text[end])) {
         end--;
     }
@@ -143,6 +144,7 @@ function splitText(text) {
     const chunks = [];
     for (let start = 0; start < input.length;) {
         const { end, atSentenceBoundary } = findChunkEnd(input, start);
+        // Save boundary whitespace for rejoining translated chunks.
         const chunk = input.slice(start, end).trimEnd();
         let next = end;
         while (next < input.length && /\s/.test(input[next])) next++;
@@ -236,5 +238,6 @@ async function translate(query) {
     }
 }
 
+// Bob looks up plugin entry points on exports.
 exports.supportLanguages = supportLanguages;
 exports.translate = translate;
