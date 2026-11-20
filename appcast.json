@@ -2,12 +2,12 @@
   "identifier": "local.bob.dl.noapikey",
   "versions": [
     {
-      "version": "0.1.6",
-      "desc": "支持在 Bob 中检查更新，并接入 Bob 第三方插件检索。",
-      "sha256": "5187e64a5879b16bee0664f808133ae7fa3fb30adfbed84b644add8a98a9a7c1",
-      "url": "https://github.com/XREAL1TY/bob-plugin-DL-translate/releases/download/v0.1.6/dl-translate-0.1.6.bobplugin",
+      "version": "0.1.7",
+      "desc": "长文本自动按句末分段翻译，并保留切分处的换行。",
+      "sha256": "d2c14703db5a6842932e4c4383d30e34a76eabc7374e79d5cc72be312a08152b",
+      "url": "https://github.com/XREAL1TY/bob-plugin-DL-translate/releases/download/v0.1.7/dl-translate-0.1.7.bobplugin",
       "minBobVersion": "1.21.0",
-      "timestamp": 1795091736897
+      "timestamp": 1795162682000
     }
   ]
 }
