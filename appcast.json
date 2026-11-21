@@ -1,13 +1,13 @@
 {
-  "identifier": "local.bob.dl.noapikey",
+  "identifier": "xr.bob.dl.noapikey",
   "versions": [
     {
-      "version": "0.1.7",
-      "desc": "长文本自动按句末分段翻译，并保留切分处的换行。",
-      "sha256": "d2c14703db5a6842932e4c4383d30e34a76eabc7374e79d5cc72be312a08152b",
-      "url": "https://github.com/XREAL1TY/bob-plugin-DL-translate/releases/download/v0.1.7/dl-translate-0.1.7.bobplugin",
+      "version": "0.1.8",
+      "desc": "更新插件标识为 xr.bob.dl.noapikey。",
+      "sha256": "791c68fd97598fca5e85fa273c9b0ede26c1b42ad2a1892669c08590081a098c",
+      "url": "https://github.com/XREAL1TY/bob-plugin-DL-translate/releases/download/v0.1.8/dl-translate-0.1.8.bobplugin",
       "minBobVersion": "1.21.0",
-      "timestamp": 1795162682000
+      "timestamp": 1795270181000
     }
   ]
 }
